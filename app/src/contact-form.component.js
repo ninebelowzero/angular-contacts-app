@@ -4,8 +4,11 @@ export default {
   template:
 `
 <div class="contact-form">
-  <h4>Add contact</h4>
-  <form ng-submit="onClickedSubmit($ctrl.model)">
+
+  <form ng-if="$ctrl.showForm"
+        ng-submit="onClickedSubmit($ctrl.model)">
+
+    <h4>{{ $ctrl.updating ? 'Edit contact' : 'New contact' }}</h4>
 
     <label for="fname">First name</label><input type="text" name="fname" id="fname" ng-model="$ctrl.model.fname" required><br>
 
@@ -48,23 +51,27 @@ export default {
 
     <button type="submit"
             class="button-primary">
-      Add contact
+      {{ $ctrl.updating ? 'Update contact' : 'Add contact' }}
     </button>
   </form>
 </div>
 `,
-  controller: ($scope, $window, ContactsService) => {
+  controller: ($rootScope, $scope, ContactsService) => {
 
-    $scope.ngModel = $scope.ngModel || {};
+    // console.log("$scope:", $scope);
+    // const ctrl = $scope.$ctrl;
 
-    $scope.phoneNumberRegex = new RegExp('[\d\-\s]{11,13}');
 
     $scope.onClickedSubmit = (model) => {
-      console.debug(model);
+      console.debug("Creating:", model);
       ContactsService.create(model);
     };
   },
   bindings: {
-    model: '='
+    model: '=',
+    showForm: '=',
+    updating: '=',
+    create: '&',
+    update: '&'
   }
 };
