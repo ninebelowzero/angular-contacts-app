@@ -1,3 +1,6 @@
+import './normalize.scss';
+import './skeleton.scss';
+
 export default {
   template:
 `
