@@ -1,15 +1,15 @@
 export default {
   template:
 `
-<form>
+<form ng-submit="onClickedSubmit($ctrl.model)">
   <label for="fname">First name</label>
-  <input type="text" name="fname" id="fname" ng-model="$ctrl.model.fname"><br>
+  <input type="text" name="fname" id="fname" ng-model="$ctrl.model.fname" required><br>
 
   <label for="lname">Last name</label>
-  <input type="text" name="lname" id="lname" ng-model="$ctrl.model.lname"><br>
+  <input type="text" name="lname" id="lname" ng-model="$ctrl.model.lname" required><br>
 
   <label for="email">Email</label>
-  <input type="text" name="email" id="email" ng-model="$ctrl.model.email"><br>
+  <input type="email" name="email" id="email" ng-model="$ctrl.model.email" required><br>
 
   <label for="photo">Photo</label>
   <input type="file" name="photo" id="photo" ng-model="$ctrl.model.photo"><br>
@@ -20,8 +20,11 @@ export default {
   <label for="job-title">Job title</label>
   <input type="text" name="job_title" id="job-title" ng-model="$ctrl.model.job_title"><br>
 
-  <label for="phone">Phone</label>
-  <input type="text" name="phone" id="phone" ng-model="$ctrl.model.phone"><br>
+  <label for="phone">Phone number (UK only)</label>
+
+  <input type="text" name="phone" id="phone" ng-model="$ctrl.model.phone"
+         pattern="[\\d\\-\\s\\(\\)]{11,13}"
+         title="Please enter a valid UK phone number. Do not enter the country code."><br>
 
   <label for="birthday">Birthday</label>
   <input type="date" name="birthday" id="birthday" ng-model="$ctrl.model.birthday"><br>
@@ -36,13 +39,17 @@ export default {
   <label for="notes">Notes</label>
   <input type="text" name="notes" id="notes" ng-model="$ctrl.model.notes"></br>
 
-  <button type="submit" ng-click="onClickedSubmit($ctrl.model)">
+  <button type="submit">
     Add
   </button>
 </form>
 `,
   controller: ($scope, $window, ContactsService) => {
+
     $scope.ngModel = $scope.ngModel || {};
+
+    $scope.phoneNumberRegex = new RegExp('[\d\-\s]{11,13}');
+
     $scope.onClickedSubmit = (model) => {
       console.debug(model);
       ContactsService.create(model);
