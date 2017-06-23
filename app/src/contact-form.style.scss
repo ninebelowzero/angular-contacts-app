@@ -1,0 +1,23 @@
+
+.contact-form {
+
+  label {
+    display: inline-block;
+    width: 200px;
+  }
+
+  input[type='text'], input[type='email'] {
+    width: 260px;
+
+    &.space-left {
+      margin-left: 200px;
+    }
+  }
+
+  .submit-button {
+    // width: 180px;
+    // display: block;
+    // margin: 10px auto;
+  }
+
+}

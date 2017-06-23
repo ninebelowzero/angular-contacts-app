@@ -1,9 +1,30 @@
 // $border-color: #0066EE;
 $border-color: red;
+$hover-color: #33C3F0;
 
 .contacts-list {
+
+  ul {
+    list-style: none;
+  }
+
   .contact-item {
-    border: $border-color solid .1rem;
     padding: .2rem;
+    transition: color 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: $hover-color;
+    }
+
+    .name {
+      float: left;
+      font-weight: bold;
+    }
+
+    .email {
+      float: right;
+      font-style: italic;
+    }
   }
 }
