@@ -30,6 +30,7 @@ module.exports = {
   post: {
     route: '/contacts',
     respond: (req, res, next) => {
+      delete req.params._id;
       MongoClient.connect(url, (err, db) => {
         db.collection('contacts')
           .insertOne(req.params, (err, result) => {
