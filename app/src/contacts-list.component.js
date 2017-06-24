@@ -40,6 +40,9 @@ export default {
           csv-header="getCsvHeader()"
           filename="contacts.csv">Export to CSV</button>
 
+  <ng-csv-import
+    result="uploadedCsv"
+    upload-button-label="'Import contacts'"></ng-csv-import>
 
 </div>
 `,
@@ -50,6 +53,8 @@ export default {
     $scope.contacts       = [];
     $scope.shownContacts  = [];
     $scope.searchTerm     = '';
+
+    $scope.uploadedCsv = null;
 
     $scope.search = (searchTerm) => {
       console.debug(`Searching: ${searchTerm}`);
@@ -75,7 +80,7 @@ export default {
       csvRows = csvRows.map((row) => {
         row.address = Object.values(row.address).reduce((fullAddress, line, i) => {
           if (line) {
-            if (i > 0) fullAddress += ', ';
+            if (i > 0) fullAddress += '\, ';
             fullAddress += line;
           }
           return fullAddress;
@@ -88,6 +93,11 @@ export default {
     $scope.getCsvHeader = () => {
       return Object.keys(ctrl.emptyModel);
     }
+
+    $scope.$watch('uploadedCsv', (parsedData) => {
+      if (!parsedData) return;
+      ContactsService.uploadCsvData(parsedData);
+    });
 
     ContactsService.retrieve().then((response) => {
       $scope.contacts = response.data;
