@@ -56,15 +56,19 @@ export default {
   </form>
 </div>
 `,
-  controller: ($rootScope, $scope, ContactsService) => {
+  controller: ($scope, ContactsService) => {
 
-    // console.log("$scope:", $scope);
-    // const ctrl = $scope.$ctrl;
+    const ctrl = $scope.$ctrl;
 
 
     $scope.onClickedSubmit = (model) => {
-      console.debug("Creating:", model);
-      ContactsService.create(model);
+      console.debug("Submitted:", model);
+
+      if (ctrl.updating) {
+        ContactsService.update(model);
+      } else {
+        ContactsService.create(model);
+      }
     };
   },
   bindings: {

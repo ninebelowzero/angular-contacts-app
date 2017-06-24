@@ -24,7 +24,7 @@ export default {
 
 </div>
 `,
-  controller: ($rootScope, $scope, ContactsService) => {
+  controller: ($scope, ContactsService) => {
 
     $scope.contacts = [];
 

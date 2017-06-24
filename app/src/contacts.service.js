@@ -5,6 +5,9 @@ export default ($http) => {
     },
     retrieve: () => {
       return $http.get('/api/contacts');
+    },
+    update: (model) => {
+      return $http.put(`/api/contacts/${model._id}`, model);
     }
   };
 };

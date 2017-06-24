@@ -1,6 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const process     = require('process');
 const assert      = require('assert');
+const ObjectId    = require('mongodb').ObjectId;
 
 const url = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/app`;
 MongoClient.connect(url, (err, db) => {
@@ -36,6 +37,32 @@ module.exports = {
             res.send(body);
             console.log(`POST: /contacts/\n${JSON.stringify(body, null, 2)}`);
           });
+        db.close();
+        next();
+      });
+    }
+  },
+  put: {
+    route: '/contacts/:id',
+    respond: (req, res, next) => {
+
+      console.log(`req.params:`,  req.params);
+      const objectId = new ObjectId(req.params.id);
+
+      MongoClient.connect(url, (err, db) => {
+        db.collection('contacts')
+          .findOne({ _id: objectId }, (err, result) => {
+            // console.log("err:", err);
+            // console.log("result:", result);
+            let body = err ? JSON.stringify(err) : result;
+            res.send(body);
+            console.log(`PUT: /contacts/${req.params.id}\n${JSON.stringify(body, null, 2)}`);
+          });
+      //     .insertOne(req.params, (err, result) => {
+      //       let body = err ? JSON.stringify(err) : result;
+      //       res.send(body);
+      //       console.log(`POST: /contacts/\n${JSON.stringify(body, null, 2)}`);
+      //     });
         db.close();
         next();
       });

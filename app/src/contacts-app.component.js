@@ -39,7 +39,7 @@ export default {
       console.debug("Editing contact:", contact);
       ctrl.showForm = true;
       ctrl.updating = true;
-      ctrl.model = contact;
+      ctrl.model = angular.copy(contact);
     };
   }
 };

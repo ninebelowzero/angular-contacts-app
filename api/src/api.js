@@ -21,3 +21,4 @@ const contacts = require('./contacts');
 
 server.get(contacts.get.route, contacts.get.respond);
 server.post(contacts.post.route, contacts.post.respond);
+server.put(contacts.put.route, contacts.put.respond);
