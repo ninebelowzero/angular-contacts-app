@@ -45,17 +45,31 @@ module.exports = {
   put: {
     route: '/contacts/:id',
     respond: (req, res, next) => {
-
       console.log(`req.params: ${JSON.stringify(req.params)}`);
       const objectId = new ObjectId(req.params.id);
       delete req.params._id;
-
       MongoClient.connect(url, (err, db) => {
         db.collection('contacts')
           .update({ _id: objectId }, req.params, (err, result) => {
             let body = err ? JSON.stringify(err) : result;
             res.send(body);
             console.log(`PUT: /contacts/${req.params.id}\n${JSON.stringify(body, null, 2)}`);
+          });
+        db.close();
+        next();
+      });
+    }
+  },
+  delete: {
+    route: '/contacts/:id',
+    respond: (req, res, next) => {
+      const objectId = new ObjectId(req.params.id);
+      MongoClient.connect(url, (err, db) => {
+        db.collection('contacts')
+          .remove({ _id: objectId }, (err, result) => {
+            let body = err ? JSON.stringify(err) : result;
+            res.send(body);
+            console.log(`DELETE: /contacts/${req.params.id}\n${JSON.stringify(body, null, 2)}`);
           });
         db.close();
         next();
