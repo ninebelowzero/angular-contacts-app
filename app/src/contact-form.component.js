@@ -66,7 +66,6 @@ export default {
 
     const ctrl = $scope.$ctrl;
 
-
     $scope.onClickedSubmit = (model) => {
       console.debug("Submitted:", model);
 
