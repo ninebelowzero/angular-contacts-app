@@ -51,18 +51,11 @@ module.exports = {
 
       MongoClient.connect(url, (err, db) => {
         db.collection('contacts')
-          .findOne({ _id: objectId }, (err, result) => {
-            // console.log("err:", err);
-            // console.log("result:", result);
+          .update({ _id: objectId }, req.params, (err, result) => {
             let body = err ? JSON.stringify(err) : result;
             res.send(body);
             console.log(`PUT: /contacts/${req.params.id}\n${JSON.stringify(body, null, 2)}`);
           });
-      //     .insertOne(req.params, (err, result) => {
-      //       let body = err ? JSON.stringify(err) : result;
-      //       res.send(body);
-      //       console.log(`POST: /contacts/\n${JSON.stringify(body, null, 2)}`);
-      //     });
         db.close();
         next();
       });
