@@ -46,8 +46,9 @@ module.exports = {
     route: '/contacts/:id',
     respond: (req, res, next) => {
 
-      console.log(`req.params:`,  req.params);
+      console.log(`req.params: ${JSON.stringify(req.params)}`);
       const objectId = new ObjectId(req.params.id);
+      delete req.params._id;
 
       MongoClient.connect(url, (err, db) => {
         db.collection('contacts')
