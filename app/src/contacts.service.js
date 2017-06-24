@@ -8,6 +8,9 @@ export default ($http) => {
     },
     update: (model) => {
       return $http.put(`/api/contacts/${model._id}`, model);
+    },
+    delete: (model) => {
+      return $http.delete(`/api/contacts/${model._id}`);
     }
   };
 };

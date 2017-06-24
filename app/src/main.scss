@@ -3,3 +3,19 @@
   text-align: center;
   margin-top: 30px;
 }
+
+button, .button {
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.button-danger {
+  color: #FFF;
+  background-color: #d9534f;
+  border-color: #d9534f;
+
+  &:hover, &:focus {
+    color: #FFF;
+    background-color: #c9302c;
+    border-color: #c9302c;
+  }
+}

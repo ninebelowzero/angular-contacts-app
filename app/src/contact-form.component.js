@@ -53,6 +53,12 @@ export default {
             class="button-primary">
       {{ $ctrl.updating ? 'Update contact' : 'Add contact' }}
     </button>
+    <button type="button"
+            ng-if="$ctrl.updating"
+            ng-click="onClickedDelete($ctrl.model)"
+            class="button-danger">
+      Delete contact
+    </button>
   </form>
 </div>
 `,
@@ -69,6 +75,11 @@ export default {
       } else {
         ContactsService.create(model);
       }
+    };
+
+    $scope.onClickedDelete = (model) => {
+      console.debug("Deleting:", model);
+      ContactsService.delete(model);
     };
   },
   bindings: {
