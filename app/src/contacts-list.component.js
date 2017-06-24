@@ -34,12 +34,18 @@ export default {
     </li>
   </ul>
 
-  <button ng-click="$ctrl.showNewContactForm()"
-          class="add-contact-button">Add contact</button>
+  <button ng-click="$ctrl.showNewContactForm()">Add contact</button>
+
+  <button ng-csv="getCsvContent"
+          csv-header="getCsvHeader()"
+          filename="contacts.csv">Export to CSV</button>
+
 
 </div>
 `,
   controller: ($scope, ContactsService) => {
+
+    const ctrl = $scope.$ctrl;
 
     $scope.contacts       = [];
     $scope.shownContacts  = [];
@@ -56,12 +62,31 @@ export default {
       $scope.shownContacts  = [];
       $scope.contacts.forEach((contact) => {
         for (let key in contact) {
-          if (contact[key] && contact[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          if (typeof contact[key] === 'string' && contact[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
             $scope.shownContacts.push(angular.copy(contact));
             break;
           }
         }
       });
+    }
+
+    $scope.getCsvContent = () => {
+      let csvRows = angular.copy($scope.contacts);
+      csvRows = csvRows.map((row) => {
+        row.address = Object.values(row.address).reduce((fullAddress, line, i) => {
+          if (line) {
+            if (i > 0) fullAddress += ', ';
+            fullAddress += line;
+          }
+          return fullAddress;
+        }, '');
+        return row;
+      });
+      return csvRows;
+    }
+
+    $scope.getCsvHeader = () => {
+      return Object.keys(ctrl.emptyModel);
     }
 
     ContactsService.retrieve().then((response) => {
@@ -71,6 +96,7 @@ export default {
 
   },
   bindings: {
+    emptyModel: '=',
     showNewContactForm: '&',
     select: '&'
   }

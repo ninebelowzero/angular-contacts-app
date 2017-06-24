@@ -9,7 +9,8 @@ export default {
   <h1 class="main-title">Contacts</h1>
   <div class="row">
     <div class="five columns">
-      <contacts-list show-new-contact-form="$ctrl.showNewContactForm()"
+      <contacts-list empty-model="$ctrl.emptyModel"
+                     show-new-contact-form="$ctrl.showNewContactForm()"
                      select="$ctrl.select(contact)"></contacts-list>
     </div>
     <div class="seven columns">
@@ -24,7 +25,20 @@ export default {
 
     const ctrl = $scope.$ctrl;
 
-    ctrl.model = {};
+    ctrl.emptyModel = {
+      _id: '',
+      fname: '',
+      lname: '',
+      email: '',
+      photo: '',
+      company: '',
+      job_title: '',
+      phone: '',
+      birthday: '',
+      address: {},
+      notes: ''
+    };
+
     ctrl.showForm = false;
     ctrl.updating = false;
 
@@ -32,7 +46,7 @@ export default {
       console.debug("Showing new contact form");
       ctrl.showForm = true;
       ctrl.updating = false;
-      ctrl.model = {};
+      ctrl.model = angular.copy(ctrl.emptyModel);
     };
 
     ctrl.select = function(contact) {
