@@ -31,6 +31,7 @@ module.exports = {
     route: '/contacts',
     respond: (req, res, next) => {
       delete req.params._id;
+      delete req.params.id;
       MongoClient.connect(url, (err, db) => {
         db.collection('contacts')
           .insertOne(req.params, (err, result) => {
@@ -49,6 +50,7 @@ module.exports = {
       console.log(`req.params: ${JSON.stringify(req.params)}`);
       const objectId = new ObjectId(req.params.id);
       delete req.params._id;
+      delete req.params.id;
       MongoClient.connect(url, (err, db) => {
         db.collection('contacts')
           .update({ _id: objectId }, req.params, (err, result) => {

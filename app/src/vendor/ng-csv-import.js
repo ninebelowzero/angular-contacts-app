@@ -32,7 +32,7 @@ csvImport.directive('ngCsvImport', function() {
       var material = angular.isDefined(attrs.material);
       var multiple = angular.isDefined(attrs.multiple);
       return '<div class="ng-csv-import">'+
-        '<label for="csv-file-input" class="button">Upload contacts as CSV</label>' +
+        '<label for="csv-file-input" class="button">Import contacts as CSV</label>' +
       //   '<div ng-show="headerVisible"><div class="label">Header</div>' +
       //   (material ? '<input type="checkbox" ng-model="header">' :
       //     '<md-switch class="ng-csv-import-header-switch" ng-model="header"></md-switch>') +

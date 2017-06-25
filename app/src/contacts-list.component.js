@@ -34,15 +34,14 @@ export default {
     </li>
   </ul>
 
-  <button ng-click="$ctrl.showNewContactForm()">Add contact</button>
+  <button ng-click="$ctrl.showNewContactForm()">Add new contact</button>
 
   <button ng-csv="getCsvContent"
           csv-header="getCsvHeader()"
           filename="contacts.csv">Export to CSV</button>
 
   <ng-csv-import
-    result="uploadedCsv"
-    upload-button-label="'Import contacts'"></ng-csv-import>
+    result="uploadedCsv"></ng-csv-import>
 
 </div>
 `,
