@@ -12,6 +12,10 @@
     &.space-left {
       margin-left: 200px;
     }
+
+    &.ng-invalid.ng-touched {
+      box-shadow: 0 0 2px 2px #d9534f;
+    }
   }
 
   .success-message, .error-message {

@@ -1,5 +1,6 @@
-import './normalize.scss';
-import './skeleton.scss';
+import './vendor/normalize.scss';
+import './vendor/skeleton.scss';
+import './vendor/animate.scss'
 import './main.scss'
 
 export default {

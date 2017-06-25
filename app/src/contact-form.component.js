@@ -5,10 +5,10 @@ export default {
 `
 <div class="contact-form">
 
-  <p class="success-message"
+  <p class="success-message animated fadeInDown"
      ng-if="$ctrl.successMessage">✓ &emsp;{{ $ctrl.successMessage }}</p>
 
-  <p class="error-message"
+  <p class="error-message animated fadeInDown"
      ng-if="$ctrl.errorMessage">✗ &emsp;{{ $ctrl.errorMessage }}</p>
 
   <form ng-if="$ctrl.showForm"
