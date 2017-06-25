@@ -61,11 +61,16 @@ export default {
     };
 
     ctrl.select = function(contact) {
-      console.debug("Editing contact:", contact);
       ctrl.showForm = true;
       ctrl.updating = true;
       ctrl.model = angular.copy(contact);
-      if (ctrl.model.birthday) ctrl.model.birthday = new Date(ctrl.model.birthday);
+      if (ctrl.model.birthday) {
+        ctrl.model.birthday = new Date(ctrl.model.birthday);
+      }
+      if (typeof ctrl.model.address !== 'object'){
+        ctrl.model.address = { line1: ctrl.model.address.replace(/"/g, '') };
+      }
+      console.debug("Editing contact:", contact);
       ctrl.successMessage = '';
       ctrl.errorMessage = '';
     };

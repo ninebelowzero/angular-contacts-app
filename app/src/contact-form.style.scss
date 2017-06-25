@@ -6,12 +6,22 @@
     width: 200px;
   }
 
-  input[type='text'], input[type='email'] {
+  input[type='text'], input[type='email'], input[type='date'] {
     width: 100%;
 
     &.ng-invalid.ng-touched {
       box-shadow: 0 0 2px 2px #d9534f;
     }
+  }
+
+  input[type='date'] {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 3%;
+    width: 97%;
+    background-color: #fff;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
   }
 
   .success-message, .error-message {
