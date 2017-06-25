@@ -12,7 +12,8 @@ export default {
      ng-if="$ctrl.errorMessage">✗ &emsp;{{ $ctrl.errorMessage }}</p>
 
   <form ng-if="$ctrl.showForm"
-        ng-submit="onClickedSubmit($ctrl.model)">
+        ng-submit="onClickedSubmit($ctrl.model)"
+        id="contact-details">
 
     <h4>{{ $ctrl.updating ? 'Edit contact' : 'New contact' }}</h4>
 
@@ -45,10 +46,13 @@ export default {
 
     <div class="row">
       <div class="four columns">
-        <label for="photo">Photo</label>
+        <label>Photo</label>
       </div>
       <div class="eight columns">
-        <input type="file" name="photo" id="photo" ng-model="$ctrl.model.photo">
+        <label class="button narrow-button" for="photo">Choose file</label>
+        <input type="file" name="photo" id="photo" ng-model="photo"
+               onchange="angular.element(this).scope().fileNameChanged()">
+        <span>{{ $ctrl.filename }}</span>
       </div>
     </div>
 
@@ -173,6 +177,13 @@ export default {
 
     const ctrl = $scope.$ctrl;
 
+    $scope.fileNameChanged = () => {
+      var element = document.getElementById('photo');
+      ctrl.filename = element.value.match(/[^\\]*$/)[0];
+      ctrl.model.photo = element.files[0];
+      $scope.$apply();
+    }
+
     $scope.onClickedSubmit = (model) => {
       console.debug("Submitted:", model);
 
@@ -195,6 +206,7 @@ export default {
     model: '=',
     showForm: '=',
     updating: '=',
+    filename: '=',
     successMessage: '<',
     errorMessage: '<',
     refreshData: '&',

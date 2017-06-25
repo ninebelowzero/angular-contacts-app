@@ -21,6 +21,7 @@ export default {
       <contact-form model="$ctrl.model"
                     show-form="$ctrl.showForm"
                     updating="$ctrl.updating"
+                    filename="$ctrl.filename"
                     refresh-data="$ctrl.refreshData()"
                     error-handler="$ctrl.errorHandler()"
                     success-message="$ctrl.successMessage"
@@ -52,8 +53,9 @@ export default {
     ctrl.updating = false;
     ctrl.successMessage = '';
     ctrl.errorMessage = '';
+    ctrl.filename = '';
 
-    ctrl.showNewContactForm = function() {
+    ctrl.showNewContactForm = () => {
       console.debug("Showing new contact form");
       ctrl.showForm = true;
       ctrl.updating = false;
@@ -62,7 +64,7 @@ export default {
       ctrl.errorMessage = '';
     };
 
-    ctrl.select = function(contact) {
+    ctrl.select = (contact) => {
       ctrl.showForm = true;
       ctrl.updating = true;
       ctrl.model = angular.copy(contact);
@@ -75,26 +77,30 @@ export default {
       console.debug("Editing contact:", contact);
       ctrl.successMessage = '';
       ctrl.errorMessage = '';
+      ctrl.filename = '';
     };
 
     ctrl.refreshData = (isFirstPageLoad) => {
       ContactsService.retrieve().then((response) => {
         ctrl.contacts = response.data;
-        ctrl.showForm = false;
-        ctrl.updating = false;
         ctrl.errorMessage = '';
-
         if (!isFirstPageLoad) {
           ctrl.successMessage = 'Updated your contacts.';
         }
+        resetForm();
       });
     }
 
     ctrl.errorHandler = () => {
-      ctrl.showForm = false;
-      ctrl.updating = false;
       ctrl.errorMessage = 'Sorry, something went wrong.';
       ctrl.successMessage = '';
+      resetForm();
+    }
+
+    const resetForm = () => {
+      ctrl.showForm = false;
+      ctrl.updating = false;
+      ctrl.filename = '';
     }
 
     ctrl.refreshData(true);
