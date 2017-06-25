@@ -9,19 +9,22 @@ export default {
   <h1 class="main-title">Contacts</h1>
   <div class="row">
     <div class="five columns">
-      <contacts-list empty-model="$ctrl.emptyModel"
+      <contacts-list contacts="$ctrl.contacts"
+                     empty-model="$ctrl.emptyModel"
                      show-new-contact-form="$ctrl.showNewContactForm()"
                      select="$ctrl.select(contact)"></contacts-list>
     </div>
     <div class="seven columns">
       <contact-form model="$ctrl.model"
                     show-form="$ctrl.showForm"
-                    updating="$ctrl.updating"></contact-form>
+                    updating="$ctrl.updating"
+                    refresh-data="$ctrl.refreshData()"></contact-form>
     </div>
   </div>
+
 </div>
 `,
-  controller: ($scope) => {
+  controller: ($scope, ContactsService) => {
 
     const ctrl = $scope.$ctrl;
 
@@ -55,5 +58,15 @@ export default {
       ctrl.updating = true;
       ctrl.model = angular.copy(contact);
     };
+
+    ctrl.refreshData = () => {
+      ContactsService.retrieve().then((response) => {
+        ctrl.contacts = response.data;
+        ctrl.showForm = false;
+        ctrl.updating = false;
+      });
+    }
+
+    ctrl.refreshData();
   }
 };

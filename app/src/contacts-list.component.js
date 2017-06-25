@@ -7,9 +7,9 @@ export default {
 
   <h4>Your contacts</h4>
 
-  <p ng-if="!contacts.length">You have no contacts.</p>
+  <p ng-if="!$ctrl.contacts.length">You have no contacts.</p>
 
-  <div ng-if="contacts.length"
+  <div ng-if="$ctrl.contacts.length"
        class="row">
     <div class="four columns">
       <label for="search">Search</label>
@@ -23,7 +23,7 @@ export default {
 
   <hr>
 
-  <ul ng-if="contacts.length">
+  <ul ng-if="shownContacts.length">
     <li class="contact-item"
         ng-repeat="contact in shownContacts"
         ng-click="$ctrl.select({ contact: contact })"
@@ -50,22 +50,20 @@ export default {
 
     const ctrl = $scope.$ctrl;
 
-    $scope.contacts       = [];
     $scope.shownContacts  = [];
     $scope.searchTerm     = '';
-
-    $scope.uploadedCsv = null;
+    $scope.uploadedCsv    = null;
 
     $scope.search = (searchTerm) => {
       console.debug(`Searching: ${searchTerm}`);
 
       if (!searchTerm) {
-        $scope.shownContacts = angular.copy($scope.contacts);
+        $scope.shownContacts = angular.copy(ctrl.contacts);
         return;
       }
 
-      $scope.shownContacts  = [];
-      $scope.contacts.forEach((contact) => {
+      $scope.shownContacts = [];
+      ctrl.contacts.forEach((contact) => {
         for (let key in contact) {
           if (typeof contact[key] === 'string' && contact[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
             $scope.shownContacts.push(angular.copy(contact));
@@ -76,7 +74,7 @@ export default {
     }
 
     $scope.getCsvContent = () => {
-      let csvRows = angular.copy($scope.contacts);
+      let csvRows = angular.copy(ctrl.contacts);
       csvRows = csvRows.map((row) => {
         row.address = Object.values(row.address).reduce((fullAddress, line, i) => {
           if (line) {
@@ -99,14 +97,15 @@ export default {
       ContactsService.uploadCsvData(parsedData);
     });
 
-    ContactsService.retrieve().then((response) => {
-      $scope.contacts = response.data;
-      $scope.shownContacts = angular.copy($scope.contacts);
+    $scope.$watch('$ctrl.contacts', (newList) => {
+      if (!newList) return;
+      $scope.shownContacts = angular.copy(newList);
     });
 
   },
   bindings: {
-    emptyModel: '=',
+    contacts: '<',
+    emptyModel: '<',
     showNewContactForm: '&',
     select: '&'
   }

@@ -70,15 +70,18 @@ export default {
       console.debug("Submitted:", model);
 
       if (ctrl.updating) {
-        ContactsService.update(model);
+        ContactsService.update(model)
+          .then(ctrl.refreshData);
       } else {
-        ContactsService.create(model);
+        ContactsService.create(model)
+          .then(ctrl.refreshData);
       }
     };
 
     $scope.onClickedDelete = (model) => {
       console.debug("Deleting:", model);
-      ContactsService.delete(model);
+      ContactsService.delete(model)
+        .then(ctrl.refreshData);
     };
   },
   bindings: {
@@ -86,6 +89,7 @@ export default {
     showForm: '=',
     updating: '=',
     create: '&',
-    update: '&'
+    update: '&',
+    refreshData: '&'
   }
 };
