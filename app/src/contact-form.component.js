@@ -5,6 +5,12 @@ export default {
 `
 <div class="contact-form">
 
+  <p class="success-message"
+     ng-if="$ctrl.successMessage">{{ $ctrl.successMessage }}</p>
+
+  <p class="error-message"
+     ng-if="$ctrl.errorMessage">{{ $ctrl.errorMessage }}</p>
+
   <form ng-if="$ctrl.showForm"
         ng-submit="onClickedSubmit($ctrl.model)">
 
@@ -88,6 +94,8 @@ export default {
     model: '=',
     showForm: '=',
     updating: '=',
+    successMessage: '<',
+    errorMessage: '<',
     create: '&',
     update: '&',
     refreshData: '&'

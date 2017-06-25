@@ -18,7 +18,10 @@ export default {
       <contact-form model="$ctrl.model"
                     show-form="$ctrl.showForm"
                     updating="$ctrl.updating"
-                    refresh-data="$ctrl.refreshData()"></contact-form>
+                    refresh-data="$ctrl.refreshData()"
+                    error-handler="$ctrl.errorHandler"
+                    success-message="$ctrl.successMessage"
+                    error-message="$ctrl.errorMessage"></contact-form>
     </div>
   </div>
 
@@ -44,6 +47,8 @@ export default {
 
     ctrl.showForm = false;
     ctrl.updating = false;
+    ctrl.successMessage = '';
+    ctrl.errorMessage = '';
 
     ctrl.showNewContactForm = function() {
       console.debug("Showing new contact form");
@@ -59,14 +64,24 @@ export default {
       ctrl.model = angular.copy(contact);
     };
 
-    ctrl.refreshData = () => {
+    ctrl.refreshData = (isFirstPageLoad) => {
       ContactsService.retrieve().then((response) => {
         ctrl.contacts = response.data;
         ctrl.showForm = false;
         ctrl.updating = false;
+
+        if (!isFirstPageLoad) {
+          ctrl.successMessage = 'Updated';
+        }
       });
     }
 
-    ctrl.refreshData();
+    ctrl.errorHandler = () => {
+      ctrl.showForm = false;
+      ctrl.updating = false;
+      ctrl.errorMessage = 'Sorry, something went wrong.';
+    }
+
+    ctrl.refreshData(true);
   }
 };
