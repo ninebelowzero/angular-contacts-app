@@ -77,17 +77,17 @@ export default {
 
       if (ctrl.updating) {
         ContactsService.update(model)
-          .then(ctrl.refreshData);
+          .then(ctrl.refreshData, ctrl.errorHandler);
       } else {
         ContactsService.create(model)
-          .then(ctrl.refreshData);
+          .then(ctrl.refreshData, ctrl.errorHandler);
       }
     };
 
     $scope.onClickedDelete = (model) => {
       console.debug("Deleting:", model);
       ContactsService.delete(model)
-        .then(ctrl.refreshData);
+        .then(ctrl.refreshData, ctrl.errorHandler);
     };
   },
   bindings: {
@@ -98,6 +98,7 @@ export default {
     errorMessage: '<',
     create: '&',
     update: '&',
-    refreshData: '&'
+    refreshData: '&',
+    errorHandler: '&'
   }
 };

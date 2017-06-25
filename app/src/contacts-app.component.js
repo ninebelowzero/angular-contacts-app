@@ -19,7 +19,7 @@ export default {
                     show-form="$ctrl.showForm"
                     updating="$ctrl.updating"
                     refresh-data="$ctrl.refreshData()"
-                    error-handler="$ctrl.errorHandler"
+                    error-handler="$ctrl.errorHandler()"
                     success-message="$ctrl.successMessage"
                     error-message="$ctrl.errorMessage"></contact-form>
     </div>
@@ -55,6 +55,8 @@ export default {
       ctrl.showForm = true;
       ctrl.updating = false;
       ctrl.model = angular.copy(ctrl.emptyModel);
+      ctrl.successMessage = '';
+      ctrl.errorMessage = '';
     };
 
     ctrl.select = function(contact) {
@@ -62,6 +64,8 @@ export default {
       ctrl.showForm = true;
       ctrl.updating = true;
       ctrl.model = angular.copy(contact);
+      ctrl.successMessage = '';
+      ctrl.errorMessage = '';
     };
 
     ctrl.refreshData = (isFirstPageLoad) => {
@@ -69,6 +73,7 @@ export default {
         ctrl.contacts = response.data;
         ctrl.showForm = false;
         ctrl.updating = false;
+        ctrl.errorMessage = '';
 
         if (!isFirstPageLoad) {
           ctrl.successMessage = 'Updated';
@@ -80,6 +85,7 @@ export default {
       ctrl.showForm = false;
       ctrl.updating = false;
       ctrl.errorMessage = 'Sorry, something went wrong.';
+      ctrl.successMessage = '';
     }
 
     ctrl.refreshData(true);
