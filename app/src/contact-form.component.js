@@ -16,55 +16,155 @@ export default {
 
     <h4>{{ $ctrl.updating ? 'Edit contact' : 'New contact' }}</h4>
 
-    <label for="fname">First name</label><input type="text" name="fname" id="fname" ng-model="$ctrl.model.fname" required><br>
+    <div class="row">
+      <div class="four columns">
+        <label for="fname">First name</label>
+      </div>
+      <div class="eight columns">
+        <input type="text" name="fname" id="fname" ng-model="$ctrl.model.fname" required>
+      </div>
+    </div>
 
-    <label for="lname">Last name</label><input type="text" name="lname" id="lname" ng-model="$ctrl.model.lname" required><br>
+    <div class="row">
+      <div class="four columns">
+        <label for="lname">Last name</label>
+      </div>
+      <div class="eight columns">
+        <input type="text" name="lname" id="lname" ng-model="$ctrl.model.lname" required>
+      </div>
+    </div>
 
-    <label for="email">Email</label><input type="email" name="email" id="email" ng-model="$ctrl.model.email" required><br>
+    <div class="row">
+      <div class="four columns">
+        <label for="email">Email</label>
+      </div>
+      <div class="eight columns">
+        <input type="email" name="email" id="email" ng-model="$ctrl.model.email" required>
+      </div>
+    </div>
 
-    <label for="photo">Photo</label><input type="file" name="photo" id="photo" ng-model="$ctrl.model.photo"><br>
+    <div class="row">
+      <div class="four columns">
+        <label for="photo">Photo</label>
+      </div>
+      <div class="eight columns">
+        <input type="file" name="photo" id="photo" ng-model="$ctrl.model.photo">
+      </div>
+    </div>
 
-    <label for="company">Company</label><input type="text" name="company" id="company" ng-model="$ctrl.model.company"><br>
+    <div class="row">
+      <div class="four columns">
+        <label for="company">Company</label>
+      </div>
+      <div class="eight columns">
+        <input type="text" name="company" id="company" ng-model="$ctrl.model.company">
+      </div>
+    </div>
 
-    <label for="job-title">Job title</label><input type="text" name="job_title" id="job-title" ng-model="$ctrl.model.job_title"><br>
+    <div class="row">
+      <div class="four columns">
+        <label for="job-title">Job title</label>
+      </div>
+      <div class="eight columns">
+        <input type="text" name="job_title" id="job-title" ng-model="$ctrl.model.job_title">
+      </div>
+    </div>
 
-    <label for="phone">Phone number (UK only)</label><input type="text" name="phone" id="phone" ng-model="$ctrl.model.phone"
-           pattern="[\\d\\-\\s\\(\\)]{11,13}"
-           title="Please enter a valid UK phone number. Do not enter the country code."><br>
+    <div class="row">
+      <div class="four columns">
+        <label for="phone">Phone number</label>
+      </div>
+      <div class="eight columns">
+        <input type="text" name="phone" id="phone" ng-model="$ctrl.model.phone"
+                     pattern="[\\d\\-\\s\\(\\)]{11,13}"
+                     title="Please enter a valid UK phone number. Do not enter the country code.">
+      </div>
+    </div>
 
-    <label for="birthday">Birthday</label><input type="date" name="birthday" id="birthday" ng-model="$ctrl.model.birthday"><br>
+    <div class="row">
+      <div class="four columns">
+        <label for="birthday">Birthday</label>
+      </div>
+      <div class="eight columns">
+        <input type="date" name="birthday" id="birthday" ng-model="$ctrl.model.birthday">
+      </div>
+    </div>
 
-    <label for="address-line-1">Address</label><input type="text" name="address_line_1" id="address-line-1"
-           ng-model="$ctrl.model.address.line1"><br>
+    <div class="row">
+      <div class="four columns">
+        <label for="address-line-1">Address</label>
+      </div>
+      <div class="eight columns">
+        <input type="text" name="address_line_1" id="address-line-1"
+               ng-model="$ctrl.model.address.line1">
+      </div>
+    </div>
 
-    <input type="text" name="address_line_2" id="address-line-2"
-           class="space-left"
-           ng-model="$ctrl.model.address.line2"><br>
+    <div class="row">
+      <div class="four columns">
+        &nbsp;
+      </div>
+      <div class="eight columns">
+        <input type="text" name="address_line_2" id="address-line-2"
+               class="space-left"
+               ng-model="$ctrl.model.address.line2">
+      </div>
+    </div>
 
-    <input type="text" name="address_line_3" id="address-line-3"
-           class="space-left"
-           ng-model="$ctrl.model.address.line3"><br>
+    <div class="row">
+      <div class="four columns">
+        &nbsp;
+      </div>
+      <div class="eight columns">
+        <input type="text" name="address_line_3" id="address-line-3"
+               class="space-left"
+               ng-model="$ctrl.model.address.line3">
+      </div>
+    </div>
 
-    <input type="text" name="address_line_4" id="address-line-4"
-           class="space-left"
-           ng-model="$ctrl.model.address.line4"><br>
+    <div class="row">
+      <div class="four columns">
+        &nbsp;
+      </div>
+      <div class="eight columns">
+        <input type="text" name="address_line_4" id="address-line-4"
+               class="space-left"
+               ng-model="$ctrl.model.address.line4">
+      </div>
+    </div>
 
-    <input type="text" name="address_line_5" id="address-line-5"
-           class="space-left"
-           ng-model="$ctrl.model.address.line5"><br>
+    <div class="row">
+      <div class="four columns">
+        &nbsp;
+      </div>
+      <div class="eight columns">
+        <input type="text" name="address_line_5" id="address-line-5"
+               class="space-left"
+               ng-model="$ctrl.model.address.line5">
+      </div>
+    </div>
 
-    <label for="notes">Notes</label><input type="text" name="notes" id="notes" ng-model="$ctrl.model.notes"></br>
+    <div class="row">
+      <div class="four columns">
+        <label for="notes">Notes</label>
+      </div>
+      <div class="eight columns">
+        <input type="text" name="notes" id="notes" ng-model="$ctrl.model.notes">
+      </div>
+    </div>
 
     <button type="submit"
             class="button-primary">
       {{ $ctrl.updating ? 'Update contact' : 'Add contact' }}
     </button>
+
     <button type="button"
             ng-if="$ctrl.updating"
             ng-click="onClickedDelete($ctrl.model)"
             class="button-danger">
       Delete contact
     </button>
+
   </form>
 </div>
 `,

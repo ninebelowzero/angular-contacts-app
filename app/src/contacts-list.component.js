@@ -100,6 +100,7 @@ export default {
     $scope.$watch('$ctrl.contacts', (newList) => {
       if (!newList) return;
       $scope.shownContacts = angular.copy(newList);
+      $scope.searchTerm = '';
     });
 
   },
