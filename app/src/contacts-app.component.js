@@ -76,7 +76,7 @@ export default {
         ctrl.errorMessage = '';
 
         if (!isFirstPageLoad) {
-          ctrl.successMessage = 'Updated';
+          ctrl.successMessage = 'Updated your contacts.';
         }
       });
     }

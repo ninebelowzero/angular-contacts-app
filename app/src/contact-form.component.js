@@ -6,10 +6,10 @@ export default {
 <div class="contact-form">
 
   <p class="success-message"
-     ng-if="$ctrl.successMessage">{{ $ctrl.successMessage }}</p>
+     ng-if="$ctrl.successMessage">✓ &emsp;{{ $ctrl.successMessage }}</p>
 
   <p class="error-message"
-     ng-if="$ctrl.errorMessage">{{ $ctrl.errorMessage }}</p>
+     ng-if="$ctrl.errorMessage">✗ &emsp;{{ $ctrl.errorMessage }}</p>
 
   <form ng-if="$ctrl.showForm"
         ng-submit="onClickedSubmit($ctrl.model)">
