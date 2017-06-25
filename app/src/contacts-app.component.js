@@ -65,6 +65,7 @@ export default {
       ctrl.showForm = true;
       ctrl.updating = true;
       ctrl.model = angular.copy(contact);
+      if (ctrl.model.birthday) ctrl.model.birthday = new Date(ctrl.model.birthday);
       ctrl.successMessage = '';
       ctrl.errorMessage = '';
     };
