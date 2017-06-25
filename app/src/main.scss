@@ -23,3 +23,12 @@ button, .button {
 input[type='text'], input[type='email'] {
   width: 100%;
 }
+
+input[type='file']{
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}

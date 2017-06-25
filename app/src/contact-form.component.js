@@ -166,6 +166,7 @@ export default {
     </button>
 
   </form>
+
 </div>
 `,
   controller: ($scope, ContactsService) => {
@@ -196,8 +197,6 @@ export default {
     updating: '=',
     successMessage: '<',
     errorMessage: '<',
-    create: '&',
-    update: '&',
     refreshData: '&',
     errorHandler: '&'
   }

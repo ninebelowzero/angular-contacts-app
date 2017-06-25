@@ -13,7 +13,9 @@ export default {
       <contacts-list contacts="$ctrl.contacts"
                      empty-model="$ctrl.emptyModel"
                      show-new-contact-form="$ctrl.showNewContactForm()"
-                     select="$ctrl.select(contact)"></contacts-list>
+                     select="$ctrl.select(contact)"
+                     refresh-data="$ctrl.refreshData()"
+                     error-handler="$ctrl.errorHandler()"></contacts-list>
     </div>
     <div class="seven columns">
       <contact-form model="$ctrl.model"

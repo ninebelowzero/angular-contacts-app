@@ -32,9 +32,11 @@ export default ($http) => {
 
       console.log("Processed data:", data);
 
-      data.forEach((model) => {
+      let promises = data.map((model) => {
         return $http.post('/api/contacts', model);
       });
+
+      return Promise.all(promises);
 
     }
   };

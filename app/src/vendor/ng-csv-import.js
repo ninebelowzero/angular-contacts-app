@@ -32,19 +32,20 @@ csvImport.directive('ngCsvImport', function() {
       var material = angular.isDefined(attrs.material);
       var multiple = angular.isDefined(attrs.multiple);
       return '<div class="ng-csv-import">'+
-        '<div ng-show="headerVisible"><div class="label">Header</div>' +
-        (material ? '<input type="checkbox" ng-model="header">' :
-          '<md-switch class="ng-csv-import-header-switch" ng-model="header"></md-switch>') +
-      '</div>' +
-      '<div ng-show="encodingVisible"><div class="label">Encoding</div><span>{{encoding}}</span></div>'+
-      '<div ng-show="separatorVisible">'+
-      '<div class="label">Seperator</div>'+
-      '<span><input class="separator-input ' + (material ? '_md md-input' : '')  + ' " type="text" ng-change="changeSeparator" ng-model="separator"><span>'+
-      '</div>'+
-      '<div>' +
-      '<input ZZclass="btn cta gray" upload-button-label="{{uploadButtonLabel}}" type="file" '+ (multiple ? 'multiple' : '') +' accept="{{accept}}"/>' +
-      (material ? '<md-button ng-click="onClick($event)" class="_md md-button {{mdButtonClass}}"><md-icon md-svg-icon="{{mdSvgIcon}}"></md-icon> {{mdButtonTitle}}</md-button><md-input-container style="margin:0;"><input type="text" class="_md md-input-readable md-input {{mdInputClass}}" ng-click="onClick($event)" ng-model="filename"></md-input-container>' : '') +
-      '</div>'+
+        '<label for="csv-file-input" class="button">Upload contacts as CSV</label>' +
+      //   '<div ng-show="headerVisible"><div class="label">Header</div>' +
+      //   (material ? '<input type="checkbox" ng-model="header">' :
+      //     '<md-switch class="ng-csv-import-header-switch" ng-model="header"></md-switch>') +
+      // '</div>' +
+      // '<div ng-show="encodingVisible"><div class="label">Encoding</div><span>{{encoding}}</span></div>'+
+      // '<div ng-show="separatorVisible">'+
+      // '<div class="label">Seperator</div>'+
+      // '<span><input class="separator-input ' + (material ? '_md md-input' : '')  + ' " type="text" ng-change="changeSeparator" ng-model="separator"><span>'+
+      // '</div>'+
+      // '<div>' +
+      '<input type="file" id="csv-file-input">' +
+      // (material ? '<md-button ng-click="onClick($event)" class="_md md-button {{mdButtonClass}}"><md-icon md-svg-icon="{{mdSvgIcon}}"></md-icon> {{mdButtonTitle}}</md-button><md-input-container style="margin:0;"><input type="text" class="_md md-input-readable md-input {{mdInputClass}}" ng-click="onClick($event)" ng-model="filename"></md-input-container>' : '') +
+      // '</div>'+
       '</div>';
     },
     link: function(scope, element, attrs) {

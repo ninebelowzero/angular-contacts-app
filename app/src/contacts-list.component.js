@@ -94,7 +94,8 @@ export default {
 
     $scope.$watch('uploadedCsv', (parsedData) => {
       if (!parsedData) return;
-      ContactsService.uploadCsvData(parsedData);
+      ContactsService.uploadCsvData(parsedData)
+        .then(ctrl.refreshData, ctrl.errorHandler);
     });
 
     $scope.$watch('$ctrl.contacts', (newList) => {
@@ -108,6 +109,8 @@ export default {
     contacts: '<',
     emptyModel: '<',
     showNewContactForm: '&',
-    select: '&'
+    select: '&',
+    refreshData: '&',
+    errorHandler: '&'
   }
 };
