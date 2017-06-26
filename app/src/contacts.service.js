@@ -27,10 +27,12 @@ export default ($http) => {
         fields.forEach((field) => {
           obj[field] = row.shift();
         });
+        obj.address = { line1: obj.address.replace(/"/g, '') };
         return obj;
       });
 
       console.log("Processed data:", data);
+      debugger;
 
       let promises = data.map((model) => {
         return $http.post('/api/contacts', model);
